@@ -1,3 +1,4 @@
+/* global m: false, _: false, OTCWL2: false */
 var WORDS = OTCWL2;
 
 var SCRABBLE_LETTER_SCORES = {
@@ -44,8 +45,7 @@ function filterWords(ctrl) {
   var availableLetterCounts = {};
   if (starts) regexpBits.push('^' + starts);
   if (letters) {
-
-    [].slice.call(letters).forEach(function (letter) {
+    [].slice.call(letters).forEach(function count(letter) {
       availableLetterCounts[letter] = (0 | availableLetterCounts[letter]) + 1;
     });
     regexpBits.push('[' + Object.keys(availableLetterCounts).join('') + ']+');
@@ -54,7 +54,7 @@ function filterWords(ctrl) {
   if (ends) regexpBits.push(ends + '$');
   var matchRe = new RegExp(regexpBits.join(''));
 
-  return WORDS.filter(function (word) {
+  return WORDS.filter(function testWord(word) {
     if (!matchRe.test(word)) return false;
     var body = word.substr(starts ? starts.length : 0);
     body = body.substr(0, body.length - (ends ? ends.length : 0));
@@ -73,11 +73,11 @@ function filterWords(ctrl) {
 function scoreWord(word, scoring) {
   switch (scoring) {
     case 'a1':
-      return _.reduce(word, function (score, letter) {
+      return _.reduce(word, function scoreA1(score, letter) {
         return score + letter.charCodeAt(0);
       }, 0);
     case 'scrabble':
-      return _.reduce(word, function (score, letter) {
+      return _.reduce(word, function scoreScrabble(score, letter) {
         return score + (SCRABBLE_LETTER_SCORES[letter] || 1);
       }, 0);
     case 'length':
@@ -88,14 +88,14 @@ function scoreWord(word, scoring) {
 }
 
 function sortWords(words, scoring) {
-  return _.sortBy(words, function (word) {
-    const cacheKey = '' + scoring + ':' + word;
+  return _.sortBy(words, function getWordScore(word) {
+    var cacheKey = '' + scoring + ':' + word;
     if (cacheKey in scoreCache) return scoreCache[cacheKey];
-    return scoreCache[cacheKey] = scoreWord(word, scoring);
+    return (scoreCache[cacheKey] = scoreWord(word, scoring));
   }).reverse().slice(0, 200);
 }
 
-function ctrl() {
+function controller() {
   this.letters = m.prop('');
   this.starts = m.prop('');
   this.ends = m.prop('');
@@ -128,8 +128,8 @@ function view(ctrl) {
       ]),
     ]),
     m('#list-wrap', [
-      m('ul', words.map(function (word) {
-        const reversible = (WORDS.indexOf(reverse(word)) > -1);
+      m('ul', words.map(function renderWord(word) {
+        var reversible = (WORDS.indexOf(reverse(word)) > -1);
         return m(
           'li',
           {
@@ -146,4 +146,4 @@ function view(ctrl) {
   );
 }
 
-m.module(document.getElementById('c'), {controller: ctrl, view: view});
+m.module(document.getElementById('c'), {controller: controller, view: view});
