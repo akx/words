@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Scrabbity</title>
-	<style>ul { -webkit-column-count: 5 }ul,li{margin:0;padding:0;} #c { max-width: 960px; margin: auto;} </style>
+    <meta charset="UTF-8">
+    <title>Words</title>
+    <style>
+        ul {
+            -webkit-column-count: 5;
+        }
+
+        ul, li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #c {
+            max-width: 960px;
+            margin: auto;
+        } </style>
 </head>
 <body>
-	<div id="c">Hold on... Lots of words to load.</div>
-	<!--<script src="sowpods.js"></script>-->
-	<script src="otcwl2.js"></script>
-	<script src="mithril.js"></script>
-	<script src="lodash.js"></script>
-	<script src="scrabbity.js"></script>
+<div id="c">Hold on... Lots of words to load.</div>
+<script src="lists/otcwl2.js"></script>
+<script src="lib/mithril.min.js"></script>
+<script src="lib/lodash.core.min.js"></script>
+<script src="words.js"></script>
 </body>
 </html>
