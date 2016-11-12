@@ -12,14 +12,15 @@ body {
     margin: 0;
 }
 
-ul {
-    -webkit-column-count: 6;
-}
-
 ul, li {
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+li {
+    display: inline-block;
+    padding: 0.5em;
 }
 
 #list-wrap {
