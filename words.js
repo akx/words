@@ -127,9 +127,22 @@ function view(ctrl) {
         m('option', {value: 'length'}, 'Length Scoring'),
       ]),
     ]),
-    m('ul', words.map(function (word) {
-      return m('li', {key: word}, word, WORDS.indexOf(reverse(word)) > -1 ? ' *' : '');
-    }))
+    m('#list-wrap', [
+      m('ul', words.map(function (word) {
+        const reversible = (WORDS.indexOf(reverse(word)) > -1);
+        return m(
+          'li',
+          {
+            key: word,
+            class: reversible ? 'reversible' : '',
+          },
+          [
+            word,
+            (reversible ? m('span.rev', ' *') : null),
+          ]
+        );
+      })),
+    ])
   );
 }
 
