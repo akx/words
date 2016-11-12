@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-size: 14pt;
     font-family: -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans",
@@ -29,7 +30,7 @@ ul, li {
 
 .setup {
     display: flex;
-    background: #048BA8;
+    background: #25191A;
     padding: 0.25em;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 }
@@ -40,10 +41,14 @@ ul, li {
     padding: 0.1em;
     background: transparent;
     border: none;
-    border-bottom: 1px solid rgba(242, 232, 99, 0.5);
-    color: #F2E863;
+    border-bottom: 1px solid #DE9036;
+    color: #FAF3C7;
 }
 
 ::-webkit-input-placeholder {
-    color: rgba(242, 232, 99, 0.9);
+    color: rgba(222, 144, 54, 0.78);
+}
+
+.setup option {
+    background: #000;
 }
